@@ -3,6 +3,8 @@ extern crate custom_derive;
 #[macro_use]
 extern crate newtype_derive;
 
+pub use sentry;
+
 /// Just use this type as return error type for your handler functions (ex: `Result<String, custom_derive::Error>`)
 /// and after running the usual `let _guard = sentry::init(...);`
 /// and it will send any error to sentry.
@@ -33,7 +35,10 @@ impl<'r> rocket::response::Responder<'r> for Error {
 				.collect(),
 			..Default::default()
 		});
-		sentry::capture_event(event); // Send event to sentry
+		let uuid = sentry::capture_event(event); // Send event to sentry
+		if uuid.is_nil() {
+			panic!("Could not send request event to Sentry. Make sure you are using matching sentry versions. Consider using sentry_rocket::sentry instead of sentry to make sure versions do match")
+		}
 		Err(rocket::http::Status::InternalServerError)
 	}
 }
