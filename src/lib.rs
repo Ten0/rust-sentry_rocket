@@ -5,11 +5,13 @@ extern crate newtype_derive;
 
 pub use sentry;
 
-/// Just use this type as return error type for your handler functions (ex: `Result<String, custom_derive::Error>`)
-/// and after running the usual `let _guard = sentry::init(...);`
-/// and it will send any error to sentry.
-/// Note that you should use the `failure` crate to propagate your errors if you wish to have proper backtrace handling.
 custom_derive! {
+	/// Just use this type as return error type for your handler functions (ex: `Result<String, custom_derive::Error>`)
+	/// and after running the usual `let _guard = sentry::init(...);`
+	/// and it will send any error to sentry.
+	/// Note that you should use the `failure` crate to propagate your errors if you wish to have proper backtrace handling.
+	/// Also, using `sentry_rocket::sentry` instead of `sentry` will ensure the versions match so that everything works properly
+	/// (also, then you don't need `sentry` as a dependency for your project, only `sentry_rocket`)
 	#[derive(NewtypeFrom, NewtypeDeref, NewtypeDebug)]
 	pub struct Error(failure::Error);
 }
