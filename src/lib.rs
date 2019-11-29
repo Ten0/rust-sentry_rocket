@@ -5,8 +5,10 @@ extern crate newtype_derive;
 
 pub use sentry;
 
+pub type Result<T> = Result<T, Error>;
+
 custom_derive! {
-	/// Just use this type as return error type for your handler functions (ex: `Result<String, custom_derive::Error>`)
+	/// Just use this type as return error type for your handler functions (ex: `Result<String, sentry_rocket::Error>`)
 	/// and after running the usual `let _guard = sentry::init(...);`
 	/// and it will send any error to sentry.
 	/// Note that you should use the `failure` crate to propagate your errors if you wish to have proper backtrace handling.

@@ -1,6 +1,6 @@
 [package]
 name = "sentry_rocket"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Thomas BESSOU <thomas.bessou@hotmail.fr>"]
 edition = "2018"
 description = "Sentry.io client extension for rocket"
@@ -8,8 +8,8 @@ repository = "https://github.com/Ten0/rust-sentry_rocket"
 license = "LGPL-3.0-only"
 
 [dependencies]
-failure = "0.1.5"
-rocket = "0.4.0"
+failure = "0.1.6"
+rocket = "0.4.2"
 custom_derive = "0.1.7"
 newtype_derive = "0.1.6"
-sentry = "0.13.0"
+sentry = "0.17.0"
